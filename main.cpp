@@ -1,5 +1,5 @@
-#include "./my_containers/other_tools/iterators_traits.hpp"
-#include "./my_containers/other_tools/reverse_iterator.hpp"
+#include "./other_tools/iterators_traits.hpp"
+#include "./other_tools/reverse_iterator.hpp"
 #include <vector>
 
 int main()
