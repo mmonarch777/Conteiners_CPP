@@ -1,6 +1,7 @@
 #ifndef REVERSE_ITERATOR_HPP
 # define REVERSE_ITERATOR_HPP
 # include "iterators_traits.hpp"
+# include "enable_itegral.hpp"
 
 namespace ft
 {
@@ -22,8 +23,10 @@ namespace ft
         explicit reverse_iterator(iterator_type ptr): ptr(ptr) {};
 
         template <class Iter>
-        reverse_iterator(const reverse_iterator<Iter> & other) : ptr(other.base()) {}
-        virtual ~reverse_iterator() {};
+        reverse_iterator(const reverse_iterator<Iter> & other,
+                         typename ft::enable_if<std::is_convertible<Iter, Iterator>::value>::type* = 0)
+                         : ptr(other.base()) {}
+        ~reverse_iterator() {};
 
         reverse_iterator &operator=(const reverse_iterator &other)
         {
@@ -123,48 +126,5 @@ namespace ft
             return (ptr >= other.ptr);
         }
     };
-
-    template <class Iterator, class Iterator2>
-    bool operator!=(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() != rev2.base());
-    }
-    template <class Iterator, class Iterator2>
-    bool operator==(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() == rev2.base());
-    }
-    template <class Iterator, class Iterator2>
-    bool operator>(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() < rev2.base());
-    }
-    template <class Iterator, class Iterator2>
-    bool operator<(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() > rev2.base());
-    }
-    template <class Iterator, class Iterator2>
-    bool operator>=(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() <= rev2.base());
-    }
-    template <class Iterator, class Iterator2>
-    bool operator<=(reverse_iterator<Iterator> const &rev1, reverse_iterator<Iterator2> const &rev2)
-    {
-        return (rev1.base() >= rev2.base());
-    }
-    template <typename Iterator>
-    reverse_iterator<Iterator> operator+(typename reverse_iterator<Iterator>::difference_type nb,
-            const reverse_iterator<Iterator> &rev )
-    {
-        return (reverse_iterator<Iterator>(rev.base() - nb));
-    }
-    template <typename Iterator>
-    reverse_iterator<Iterator> operator-(typename reverse_iterator<Iterator>::difference_type nb,
-             const reverse_iterator<Iterator> &rev )
-    {
-        return (reverse_iterator<Iterator>(rev.base() + nb));
-    }
 }
 #endif

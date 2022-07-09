@@ -4,8 +4,8 @@ SRC		=	main.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-HEADR	=	my_containers/other_tools/iterators_traits.hpp\
-			my_containers/other_tools/reverse_iterator.hpp
+HEADR	=	other_tools/iterators_traits.hpp\
+			other_tools/reverse_iterator.hpp
 
 CC		= c++
 
