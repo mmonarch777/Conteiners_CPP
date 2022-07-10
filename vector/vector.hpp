@@ -150,12 +150,12 @@ namespace ft
 
         reference       operator[](size_type pos)       {return *(array + pos);}
         const_ref       operator[](size_type pos) const {return *(array + pos);}
-        reference       front(void)                     {return *array;}
-        const_ref       front(void) const               {return *array;}
-        reference       back(void)                      {return *(array + (_size - 1));}
-        const_ref       back(void) const                {return *(array + (_size - 1));}
-        pointer         data(void)                      {return array;}
-        const_pointer   data(void) const                {return array;}
+        reference       front()                         {return *array;}
+        const_ref       front() const                   {return *array;}
+        reference       back()                          {return *(array + (_size - 1));}
+        const_ref       back() const                    {return *(array + (_size - 1));}
+        pointer         data()                          {return array;}
+        const_pointer   data() const                    {return array;}
 
         reference at(size_type pos) {
             if (pos >= _size) {
@@ -193,10 +193,6 @@ namespace ft
             for (; first != last; ++first) {
                 push_back(*first);
             }
-        }
-
-        alloc_type get_allocator(void) const {
-            return this->allocator;
         }
 
         void clear(void) {
@@ -320,7 +316,19 @@ namespace ft
             std::swap(_capacity, other._capacity);
             std::swap(allocator, other.allocator);
         }
+
+        /*============================================================================================*/
+        /*======================================== ALLOCATOR =========================================*/
+        /*============================================================================================*/
+
+        alloc_type get_allocator(void) const {
+            return this->allocator;
+        }
     };
+
+    /*============================================================================================*/
+    /*================================== NON-MEMBER FUNCTIONS ====================================*/
+    /*============================================================================================*/
 
     template<class T, class Al>
     bool operator==(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
