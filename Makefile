@@ -1,6 +1,6 @@
 NAME	= program
 
-SRC		=	tests/vector_test.cpp
+SRC		=	main.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

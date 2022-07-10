@@ -8,11 +8,14 @@ int main()
 {
 //    std::vector<int> first(5, 1);
     ft::Vector<int> first(5, 1);
-
+    int num;
     for (int i = 0; i < (int)first.size(); i++)
         first[i] = i + 1;
     for (int i = 0; i < (int)first.size(); i++)
         std::cout << first[i] << " ";
+    std::cout << std::endl;
+    num = (int)first.size();
+    std::cout << num << std::endl;
     std::cout << std::endl;
     std::cout << "=========================" << std::endl;
     typedef ft::Vector<int>::iterator ter;
