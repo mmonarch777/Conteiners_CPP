@@ -1,11 +1,15 @@
 NAME	= program
 
-SRC		=	main.cpp
+SRC		=	tests/vector_test.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
 HEADR	=	other_tools/iterators_traits.hpp\
-			other_tools/reverse_iterator.hpp
+			other_tools/reverse_iterator.hpp\
+			other_tools/lexicographical_compare.hpp\
+			other_tools/equal.hpp\
+			vector/vector.hpp\
+			vector/vector_iterator.hpp
 
 CC		= c++
 

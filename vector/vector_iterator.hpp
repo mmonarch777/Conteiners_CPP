@@ -8,18 +8,19 @@ namespace ft
     template <typename T>
     struct vector_iterator
     {
-    public:
-        typedef typename iterator_traits<T>::difference_type    difference_type;
-        typedef typename iterator_traits<T>::value_type         value_type;
-        typedef typename iterator_traits<T>::pointer            pointer;
-        typedef typename iterator_traits<T>::reference          reference;
-        typedef typename iterator_traits<T>::iterator_category  iterator_category;
-
     private:
         T ptr;
+    public:
+        typedef T                                                           iterator_type;
+        typedef typename iterator_traits<iterator_type>::difference_type    difference_type;
+        typedef typename iterator_traits<iterator_type>::value_type         value_type;
+        typedef typename iterator_traits<iterator_type>::pointer            pointer;
+        typedef typename iterator_traits<iterator_type>::reference          reference;
+        typedef typename iterator_traits<iterator_type>::iterator_category  iterator_category;
+
 
     public:
-        vector_iterator(): ptr(0) {}
+        vector_iterator(T value): ptr(value) {}
         ~vector_iterator() {}
 
         template<class V>
@@ -63,7 +64,7 @@ namespace ft
         }
         pointer operator->() const
         {
-            return &(*ptr);
+            return this->ptr;
         }
         reference operator*()
         {
@@ -93,14 +94,15 @@ namespace ft
         }
         vector_iterator &operator-=(difference_type nb)
         {
-            ptr = ptr + nb;
+            ptr = ptr - nb;
             return *this;
         }
         vector_iterator &operator+=(difference_type nb)
         {
-            ptr = ptr - nb;
+            ptr = ptr + nb;
+            return *this;
         }
-        value_type *base() const
+        value_type base() const
         {
             return (this->ptr);
         }

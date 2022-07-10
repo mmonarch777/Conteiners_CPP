@@ -4,7 +4,7 @@
 
 namespace ft
 {
-//    ===============enable_if==================
+    /*============================ ENABLE_IF ============================*/
     template <bool Cond, typename T = void>
     struct enable_if {};
 
@@ -12,7 +12,7 @@ namespace ft
     struct enable_if<true, T>
     {typedef T type;};
 
-//    ===============is_integral==================
+    /*=========================== IS_INTEGRAL ============================*/
     template <class T, T v>
     struct intergral_constant
     {
