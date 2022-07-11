@@ -31,19 +31,20 @@ namespace ft
         pointer			array;
         size_type 		_size;
         size_type 		_capacity;
-        alloc_type	allocator;
+        alloc_type	    allocator;
     public:
 
         /*============================================================================================*/
         /*===================================== MEMBER FUNCTIONS =====================================*/
         /*============================================================================================*/
 
-        Vector() : array(0), _size(0), _capacity(0), allocator(alloc_type()) {}
-        explicit Vector(const alloc_type& alloc) : array(0), _size(0), _capacity(0), allocator(alloc) {}
-
+        /*== DEFAULT ==*/
+        explicit Vector(const alloc_type& alloc = alloc_type()): array(0), _size(0), _capacity(0), allocator(alloc) {}
+        /*== FILL ==*/
         explicit Vector(size_type n, const value_type& value = value_type(),
                         const alloc_type& alloc = alloc_type()) : array(0), _size(0), _capacity(0), allocator(alloc) {
-            if (n >= 0) {
+            if (n >= 0)
+            {
                 reserve(n);
                 for (size_t i = 0; i < n; ++i) {
                     allocator.construct(array + i, value);
@@ -51,7 +52,7 @@ namespace ft
                 this->_size = n;
             }
         }
-
+        /*== RANGE ==*/
         template<class InputIter>
         Vector(InputIter first, InputIter last,
                const alloc_type& alloc = alloc_type(),
@@ -66,7 +67,7 @@ namespace ft
                 ++_size;
             }
         }
-
+        /*== COPY ==*/
         Vector(const Vector& other) : array(0), _size(0), _capacity(0), allocator(other.allocator)
         {
             clear();
@@ -75,7 +76,7 @@ namespace ft
                 this->allocator.construct(this->array + i, other.array[i]);
             this->_size = other._size;
         }
-
+        /*== DESTRUCTOR ==*/
         virtual ~Vector(void)
         {
             clear();
@@ -131,8 +132,8 @@ namespace ft
                     allocator.destroy(array + i);
                 }
                 allocator.deallocate(array, _capacity);
-                this->array = newArr;
-                this->_capacity = n;
+                array = newArr;
+                _capacity = n;
             }
         }
 
@@ -351,38 +352,38 @@ namespace ft
     /*============================================================================================*/
 
 
-    template<class T, class Al>
-    bool operator==(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator==(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return _first.size() == _second.size() && ft::equal(_first.begin(), _first.end(), _second.begin());
     }
-    template<class T, class Al>
-    bool operator!=(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator!=(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return !(_first == _second);
     }
-    template<class T, class Al>
-    bool operator<(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator<(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return ft::lexicographical_compare(_first.begin(), _first.end(), _second.begin(), _second.end());
     }
-    template<class T, class Al>
-    bool operator<=(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator<=(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return !(_second < _first);
     }
-    template<class T, class Al>
-    bool operator>(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator>(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return _second < _first;
     }
-    template<class T, class Al>
-    bool operator>=(const ft::Vector<T, Al>& _first, const ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    bool operator>=(const ft::Vector<T, T2>& _first, const ft::Vector<T, T2>& _second)
     {
         return !(_first < _second);
     }
-    template<class T, class Al>
-    void swap(ft::Vector<T, Al>& _first, ft::Vector<T, Al>& _second)
+    template<class T, class T2>
+    void swap(ft::Vector<T, T2>& _first, ft::Vector<T, T2>& _second)
     {
         _first.swap(_second);
     }

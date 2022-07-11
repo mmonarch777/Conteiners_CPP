@@ -8,6 +8,7 @@ HEADR	=	other_tools/iterators_traits.hpp\
 			other_tools/reverse_iterator.hpp\
 			other_tools/lexicographical_compare.hpp\
 			other_tools/equal.hpp\
+			other_tools/enable_integral.hpp\
 			vector/vector.hpp\
 			vector/vector_iterator.hpp
 

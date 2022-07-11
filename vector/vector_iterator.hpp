@@ -1,6 +1,5 @@
 #ifndef VECTOR_ITERATOR_HPP
 # define VECTOR_ITERATOR_HPP
-# include "../other_tools/iterators_traits.hpp"
 # include "../other_tools/enable_integral.hpp"
 # include <memory>
 
