@@ -12,7 +12,7 @@ namespace ft
         typedef typename container_type::value_type     value_type;
         typedef typename container_type::size_type      size_type;
 
-    private:
+    protected:
         container_type ctnr;
     public:
         /*==================== MEMBER FUNCTIONS ====================*/

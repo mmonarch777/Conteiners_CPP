@@ -2,8 +2,8 @@
 # define VECTOR_HPP
 # include <iostream>
 # include <memory>
-# include "vector_iterator.hpp"
-# include "../other_tools/reverse_iterator.hpp"
+# include "../iterators/vector_iterator.hpp"
+# include "../iterators//reverse_iterator.hpp"
 # include "../other_tools/lexicographical_compare.hpp"
 # include "../other_tools/equal.hpp"
 # include "../other_tools/enable_integral.hpp"
@@ -54,10 +54,11 @@ namespace ft
         }
         /*== RANGE ==*/
         template<class InputIter>
-        Vector(InputIter first, InputIter last,
+        Vector(InputIter first,
+               InputIter last,
                const alloc_type& alloc = alloc_type(),
                typename ft::enable_if<!ft::is_integral<InputIter>::value, InputIter>::type* = 0)
-               : array(0), _size(0), _capacity(0), allocator(alloc)
+                : array(0), _size(0), _capacity(0), allocator(alloc)
         {
             clear();
             reserve(std::distance(first, last));
