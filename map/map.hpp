@@ -2,6 +2,9 @@
 # define MAP_HPP
 # include <iostream>
 # include "../other_tools/pair.hpp"
+# include "../other_tools/red_black_tree.hpp"
+# include "../iterators/node_iterator.hpp"
+# include "../iterators/reverse_iterator.hpp"
 
 namespace ft
 {

@@ -108,7 +108,7 @@ namespace ft
 
         void increment()
         {
-            if (rbt_node->NIL && rbt_node->begin != rbt_node)
+            if (rbt_node->NIL)
                 rbt_node = rbt_node->begin;
             else if (!rbt_node->right->NIL)
             {
@@ -136,9 +136,7 @@ namespace ft
         }
         void decrement()
         {
-            if (rbt_node->NIL)
-                rbt_node = rbt_node->parent;
-            else if (!rbt_node->left->NIL)
+            if (!rbt_node->left->NIL)
             {
                 rbt_node = rbt_node->left;
                 while (!rbt_node->right->NIL)
@@ -160,7 +158,6 @@ namespace ft
                 }
             }
         }
-
     };
 }
 
