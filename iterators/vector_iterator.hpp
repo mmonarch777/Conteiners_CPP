@@ -204,7 +204,7 @@ namespace ft
     vector_iterator<T> operator+(typename ft::vector_iterator<T>::difference_type n,
                                         const vector_iterator<T>& other)
     {
-        return n + other;
+        return (other + n);
     }
 }
 #endif

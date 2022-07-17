@@ -44,7 +44,8 @@ namespace ft
         reference operator*() const
         {
             iterator_type tmp = iter;
-            return *--tmp;
+//            return *--tmp;
+             return *tmp;
         }
 
         pointer operator->() const
@@ -169,7 +170,7 @@ namespace ft
     reverse_iterator<Iterator> operator+(typename reverse_iterator<Iterator>::difference_type nb,
                                          const reverse_iterator<Iterator>& other)
     {
-        return nb + other;
+        return other + nb;
     }
     template<class Iterator>
     reverse_iterator<Iterator> operator-(typename reverse_iterator<Iterator>::difference_type nb,

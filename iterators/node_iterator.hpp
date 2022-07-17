@@ -8,8 +8,8 @@ namespace ft
     template <class T, class Pair>
     class node_iterator
     {
-    private:
-        T rbt_node;
+    public:
+        T node;
 
     public:
         typedef T                                               iterator_type;
@@ -25,22 +25,23 @@ namespace ft
         /*===================================== MEMBER FUNCTIONS =====================================*/
         /*============================================================================================*/
 
-        node_iterator(T value = nullptr) : rbt_node(value) {};
+        node_iterator(T value = nullptr) : node(value) {};
         ~node_iterator() {};
 
         template <typename N1, typename N2>
-        node_iterator(const node_iterator<N1, N2> &other,
-                      typename ft::enable_if<std::is_convertible<N1, N2>::type>::type* = 0)
-                       : rbt_node(other.rbt_node) {};
+//        node_iterator(const node_iterator<N1, N2> &other,
+//                      typename ft::enable_if<std::is_convertible<N1, N2>::type>::type* = 0)
+        node_iterator(const node_iterator<N1, N2> &other)
+                       : node(other.node) {};
 
         iterator_type base() const
         {
-            return rbt_node;
+            return node;
         }
         node_iterator &operator=(const node_iterator &other)
         {
             if (this != &other)
-                rbt_node = other.rbt_node;
+                node = other.node;
             return *this;
         }
         node_iterator operator++(int)
@@ -67,94 +68,120 @@ namespace ft
         }
         reference operator*()
         {
-            return *(rbt_node->pair);
+            return *(node->pair);
         }
         const_ref operator*() const
         {
-            return *(rbt_node->pair);
+            return *(node->pair);
         }
         pointer operator->()
         {
-            return (rbt_node->pair);
+            return (node->pair);
         }
         const_pointer operator->() const
         {
-            return (rbt_node->pair);
+            return (node->pair);
         }
         bool operator==(node_iterator const &other) const
         {
-            return rbt_node == other.rbt_node;
+            return node == other.node;
         };
         bool operator!=(node_iterator const &other) const
         {
-            return rbt_node != other.rbt_node;
+            return node != other.node;
         };
         bool operator>(node_iterator const &other) const
         {
-            return rbt_node->pair > other.rbt_node->pair;
+            return node->pair > other.node->pair;
         };
         bool operator<(node_iterator const &other) const
         {
-            return other.rbt_node->pair > rbt_node->pair;
+            return other.node->pair > node->pair;
         };
         bool operator<=(node_iterator const &other) const
         {
-            return rbt_node->pair <= other.rbt_node->pair;
+            return node->pair <= other.node->pair;
         };
         bool operator>=(node_iterator const &other) const
         {
-            return rbt_node->pair >= other.rbt_node->pair;
+            return node->pair >= other.node->pair;
         };
 
         void increment()
         {
-            if (rbt_node->NIL)
-                rbt_node = rbt_node->begin;
-            else if (!rbt_node->right->NIL)
+            if (node->NIL)
             {
-                rbt_node = rbt_node->right;
-                while (!rbt_node->left->NIL)
-                    rbt_node = rbt_node->left;
+                if (node->begin != 0)
+                    node = node->begin;
+                return;
+            }
+            else if (!node->right->NIL)
+            {
+                node = node->right;
+                while (!node->left->NIL)
+                    node = node->left;
             }
             else
             {
-                T current = rbt_node;
-                T tmp = rbt_node;
-                rbt_node = rbt_node->parent;
-                if (!rbt_node) { rbt_node = current->right; return; }
-                while (rbt_node->left != tmp)
+                T current = node;
+                T tmp = node;
+                node = node->parent;
+                if (!node)
                 {
-                    if (!rbt_node->parent)
+                    node = current->right;
+                    return;
+                }
+                while (node->left != tmp)
+                {
+                    if (!node->parent)
                     {
-                        rbt_node = current->right;
+                        node = current->right;
                         break;
                     }
-                    tmp = rbt_node;
-                    rbt_node = rbt_node->parent;
+                    tmp = node;
+                    node = node->parent;
                 }
             }
         }
         void decrement()
         {
-            if (!rbt_node->left->NIL)
+            if (node->NIL)
             {
-                rbt_node = rbt_node->left;
-                while (!rbt_node->right->NIL)
-                    rbt_node = rbt_node->right;
+                node = node->parent;
+                return;
+            }
+            else if (node->NIL)
+                return;
+            if (!node->left->NIL)
+            {
+                node = node->left;
+                while (!node->right->NIL)
+                    node = node->right;
             }
             else
             {
-                T tmp = rbt_node;
-                rbt_node = rbt_node->parent;
-                while (rbt_node->right != tmp)
+                T tmp = node;
+                if (!node->parent && node->right->NIL && node->left->NIL)
                 {
-                    tmp = rbt_node;
-                    if (!rbt_node->parent)
+                    node = tmp->left;
+                    return;
+                }
+                if (node->first)
+                {
+                    *node->left->begin = *node;
+                    node = node->left;
+                    return;
+                }
+                node = node->parent;
+                while (node->right != tmp)
+                {
+                    tmp = node;
+                    if (!node->parent)
                     {
-                        rbt_node = tmp->left;
+                        node = tmp->left;
                         break;
                     }
-                    rbt_node = rbt_node->parent;
+                    node = node->parent;
                 }
             }
         }

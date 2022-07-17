@@ -8,19 +8,20 @@ namespace ft
     struct Node
     {
         Node(const value_type &p = value_type())
-         : begin(NULL), left(NULL), right(NULL), parent(0), NIL(0), color(0), pair(new value_type(p)) {};
+         : begin(0), left(NULL), right(NULL), parent(NULL), NIL(0), first(0), color(0), pair(new value_type(p)) {};
 
         ~Node()
         {
-            delete pair;
+                delete pair;
         }
 
         struct Node *begin;
         struct Node *left;
         struct Node *right;
         struct Node *parent;
-        bool color;
         bool NIL;
+        bool first;
+        bool color;
         value_type *pair;
     };
 
@@ -33,23 +34,26 @@ namespace ft
         size_t amount_node;
         Tree() : amount_node(0)
         {
-            sentinel.begin = &sentinel;
+            sentinel.begin = 0;
             sentinel.left = &sentinel;
             sentinel.right = &sentinel;
             sentinel.parent = 0;
             sentinel.color = 0;
             sentinel.NIL = true;
+            sentinel.first = false;
             root = &sentinel;
         }
 
         Tree(Tree<value_type> &other) : amount_node(0)
         {
-            sentinel.begin = &sentinel;
+            (void )other;
+            sentinel.begin = 0;
             sentinel.left = &sentinel;
             sentinel.right = &sentinel;
             sentinel.parent = 0;
             sentinel.color = 0;
             sentinel.NIL = true;
+            sentinel.first = false;
             root = &sentinel;
         }
 
@@ -210,7 +214,7 @@ namespace ft
                     {
                         if (brother->left->color == 0)
                         {
-                            brother->rihgt->color = 0;
+                            brother->right->color = 0;
                             brother->color = 1;
                             rotateLeft(brother);
                             brother = x->parent->left;
@@ -249,7 +253,7 @@ namespace ft
                 if (y == y->parent->left)
                     y->parent->left = x;
                 else
-                    y->parent->rihgt = x;
+                    y->parent->right = x;
             }
             else
                 root = x;
@@ -261,32 +265,41 @@ namespace ft
             }
             if (y->color == 0)
                 balance_delete(x);
-            amount_node--;
+            sentinel.parent = last_node();
+            --amount_node;
             delete y;
             return 1;
         }
 
-        Node<value_type> *min_node()
+        Node<value_type> *first_node()
         {
             Node<value_type> *tmp = root;
             while (!tmp->left->NIL)
                 tmp = tmp->left;
             return tmp;
         }
-        Node<value_type> *max_node()
+        Node<value_type> *last_node()
         {
             Node<value_type> *tmp = root;
             while (!tmp->right->NIL)
                 tmp = tmp->right;
             return tmp;
         }
-        Node<value_type> *getEnd()
+        Node<value_type> *end_tree()
         {
             Node<value_type> *tmp = root;
             while (!tmp->right->NIL)
                 tmp = tmp->right;
             return tmp->right;
         }
+        Node<value_type> *begin_tree()
+        {
+            Node<value_type> *tmp = root;
+            while (!tmp->left->NIL)
+                tmp = tmp->left;
+            return tmp->left;
+        }
+
     };
 }
 
