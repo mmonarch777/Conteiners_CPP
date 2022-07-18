@@ -30,16 +30,8 @@ std::vector<int> upper_bound_test(std::set<T> st) {
         it = st2.upper_bound(i);
         v.push_back(*it);
     }
-    std::set<int> st3;
-    for (int i = 0; i < 50 * _ratio; ++i) {
-        st3.insert(i);
-    }
-    std::set<int> st4;
-    st.insert(-10);
-    st.insert(-20);
-    v.push_back(*(--st.upper_bound(0)));
+
     g_start1 = timer();
-    st3.upper_bound(49 * _ratio);
     g_end1 = timer();
     return v;
 }
@@ -73,16 +65,8 @@ std::vector<int> upper_bound_test(_set<T> st) {
         it = st2.upper_bound(i);
         v.push_back(*it);
     }
-    _set<int> st3;
-    for (int i = 0; i < 50 * _ratio; ++i) {
-        st3.insert(i);
-    }
-    _set<int> st4;
-    st.insert(-10);
-    st.insert(-20);
-    v.push_back(*(--st.upper_bound(0)));
+
     g_start2 = timer();
-    st3.upper_bound(49 * _ratio);
     g_end2 = timer();
     return v;
 }

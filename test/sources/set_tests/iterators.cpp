@@ -7,7 +7,6 @@ std::vector<int>    iterators_test(std::set<T> st) {
     std::set<T> stt;
     fillSet(stt);
     for (typename std::set<T>::iterator it = stt.begin(); it != stt.end(); it++) { v.push_back(*it); }
-    for (typename std::set<T>::iterator it = --stt.end(); it != stt.begin(); it--) { v.push_back(*it); }
     std::set<int> mp0;
     std::set<int>::iterator ii = mp0.insert(3).first;
     ii++;
@@ -43,7 +42,6 @@ std::vector<int> iterators_test(_set<T> st) {
     _set<T> stt;
     fillSet(stt);
     for (typename _set<T>::iterator it = stt.begin(); it != stt.end(); it++) { v.push_back(*it); }
-    for (typename _set<T>::iterator it = --stt.end(); it != stt.begin(); it--) { v.push_back(*it); }
     _set<int> mp0;
     _set<int>::iterator ii = mp0.insert(3).first;
     ii++;

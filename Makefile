@@ -4,13 +4,19 @@ SRC		=	main.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-HEADR	=	other_tools/iterators_traits.hpp\
-			other_tools/reverse_iterator.hpp\
+HEADR	=	other_tools/pair.hpp\
+			other_tools/red_black_tree.hpp\
 			other_tools/lexicographical_compare.hpp\
 			other_tools/equal.hpp\
 			other_tools/enable_integral.hpp\
+			iterators/iterators_traits.hpp\
+			iterators/node_iterator.hpp\
+			iterators/reverse_iterator.hpp\
+			iterators/vector_iterator.hpp\
 			vector/vector.hpp\
-			vector/vector_iterator.hpp
+			map/map.hpp\
+			stack/stack.hpp\
+			set/set.hpp
 
 CC		= c++
 
